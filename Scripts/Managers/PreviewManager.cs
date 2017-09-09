@@ -26,6 +26,8 @@ public class PreviewManager : MonoBehaviour
         {
             m_scenePreviewCamera.transform.rotation = cameraPivot.rotation * GameManager.camera.transform.rotation;
             yield return null;
+
+            if (Input.GetKeyDown(KeyCode.Return)) break;
         }
 
         m_scenePreviewCamera.gameObject.SetActive(false);

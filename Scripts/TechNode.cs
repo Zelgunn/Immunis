@@ -19,7 +19,7 @@ public class TechNode : MonoBehaviour
         m_root = GetComponentInParent<TechTree>();
         m_material = GetComponent<Renderer>().material;
 
-        InitDepth();
+        if(m_previousNode == null) InitDepth();
     }
 
     private void InitDepth()
@@ -30,6 +30,7 @@ public class TechNode : MonoBehaviour
             TechNode node = child.GetComponent<TechNode>();
             if (node)
             {
+                node.InitDepth();
                 children.Add(node);
             }
         }

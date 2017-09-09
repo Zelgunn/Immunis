@@ -137,7 +137,8 @@ public class GameManager : MonoBehaviour
     {
         m_gamePhase = GamePhase.OutsideBody;
         SetGameArea(m_gamePhase);
-        StartCoroutine(OutsideBodyEnterCoroutine());
+        SetGamePhase(GamePhase.Wound);
+        //StartCoroutine(OutsideBodyEnterCoroutine());
         //m_gamePhase = GamePhase.Preparation;
         //StartCoroutine(PreparationEnterCoroutine());
     }
@@ -145,8 +146,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //m_roomScale.transform.Rotate(Vector3.up, 45 * Time.deltaTime * Input.GetAxis("Horizontal"), Space.World);
-
-        
     }
 
     #region Game phasing
@@ -168,10 +167,10 @@ public class GameManager : MonoBehaviour
                 yield return OutsideBodyEnterCoroutine();
                 break;
             case GamePhase.Wound:
-                yield return  WoundEnterCoroutine();
+                yield return WoundEnterCoroutine();
                 break;
             case GamePhase.Preparation:
-                yield return  PreparationEnterCoroutine();
+                yield return PreparationEnterCoroutine();
                 break;
             case GamePhase.Invasion:
                 yield return InvasionEnterCoroutine();
@@ -246,6 +245,8 @@ public class GameManager : MonoBehaviour
         while(!WoundManager.singleton.woundClean)
         {
             yield return null;
+
+            if (Input.GetKeyDown(KeyCode.Return)) break;
         }
 
         SetGamePhase(GamePhase.Preparation);
@@ -257,7 +258,7 @@ public class GameManager : MonoBehaviour
 
         while (!startInvasion)
         {
-            startInvasion = (InputsManager.singleton.leftTriggerDown && ControllerUI.singleton.readyMenu) || m_forceStartInvasion;
+            startInvasion = (InputsManager.singleton.leftTriggerDown && ControllerUI.singleton.readyMenu) || m_forceStartInvasion || Input.GetKeyDown(KeyCode.Return);
             yield return null;
         }
 
