@@ -4,8 +4,8 @@ Immunis is tower defense game made for VR. The game focuses on the microscopic s
 Most graphical elements were made by Edouard Angebault, Violaine Fayolle, Cléa Hemmendinger and Tiffany Luong.
 
 ## Table of contents
-[The game](#the-game)
-[Code](#code)
+[The game](#the-game)  
+[Code](#code)  
 
 ## The game
 - Hum, what happened here ?
